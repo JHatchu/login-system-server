@@ -2,11 +2,12 @@ const pool = require('../db');
  
 
 class userdao{
-    async adduser(user_id, fname, lname, email, password){
+    async adduser(fname, lname, email, password){
+        console.log("userdao...",fname, lname, email, password)
         try{
-            const user = await pool.query("INSERT INTO user_master (user_id,fname,lname,email,password) VALUES($1,$2,$3,$4,$5) RETURNING * ",
-            [user_id, fname, lname, email, password]);
-            console.log("user dao=====>",user_id, fname, lname, email, password);
+            const user = await pool.query("INSERT INTO user_master (fname,lname,email,password) VALUES($1,$2,$3,$4) RETURNING * ",
+            [ fname, lname, email, password]);
+            console.log("user dao=====>", fname, lname, email, password);
             return user.rows[0];
         }catch(error){
             console.log("user insert dao erro====>",error);
@@ -25,17 +26,7 @@ class userdao{
         }
     }
 
-    async getbyuser_id(user_id){
-        try{
-           
-            const user = await pool.query("SELECT * FROM user_master WHERE user_id = $1",[user_id])
-            console.log("user dao user_id get====>",user.rows)
-            return user.rows[0]
-        }
-        catch(error){
-            console.log("user dao get userid====>",error)
-        }
-    }
+    
 
 
 
