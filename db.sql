@@ -1,4 +1,4 @@
-CREATE DATABASE cms;
+CREATE DATABASE transSphere;
 
 CREATE TABLE user_master(
     uid SERIAL PRIMARY KEY,
